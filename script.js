@@ -1,13 +1,19 @@
-function handleQuizSubmission(e) {
+const quizForm = document.getElementById("quizForm");
+quizForm.addEventListener("submit", handleQuizSubmission());
+
+function handleQuizSubmission(event) {
+  event.preventDefault(); // Prevent the default form submission behavior
+  // Call the function to calculate the score and display the result
+  
   const { score, total } = calculateScore();
   displayQuizResult(score, total);
 }
 
 function calculateScore() {
   const answerKey = {
-    q1: 'a', // click
-    q2: 'b', // getElementById
-    q3: 'b'  // submit
+    q1: "a", // click
+    q2: "b", // getElementById
+    q3: "b", // submit
   };
 
   let score = 0;
@@ -15,7 +21,9 @@ function calculateScore() {
 
   for (const question in answerKey) {
     // Find the selected radio button for this question
-    const selectedOption = document.querySelector(`input[name="${question}"]:checked`);
+    const selectedOption = document.querySelector(
+      `input[name="${question}"]:checked`
+    );
 
     // If an option was selected and it matches the correct answer
     if (selectedOption && selectedOption.value === answerKey[question]) {
@@ -29,9 +37,13 @@ function displayQuizResult(score, total) {
   const percentage = (score / total) * 100;
   const isPassing = percentage >= 70;
 
-  document.getElementById('result').innerHTML = `
-    <div class="alert ${isPassing ? 'alert-success' : 'alert-danger'}" role="alert">
-      <h4 class="alert-heading">${isPassing ? 'Congratulations!' : 'Keep Learning!'}</h4>
+  document.getElementById("result").innerHTML = `
+    <div class="alert ${
+      isPassing ? "alert-success" : "alert-danger"
+    }" role="alert">
+      <h4 class="alert-heading">${
+        isPassing ? "Congratulations!" : "Keep Learning!"
+      }</h4>
       <p>You scored ${score} out of ${total} (${Math.round(percentage)}%)</p>
     </div>
   `;
