@@ -1,10 +1,10 @@
 const quizForm = document.getElementById("quizForm");
-quizForm.addEventListener("submit", handleQuizSubmission());
+quizForm.addEventListener("submit", handleQuizSubmission);
 
 function handleQuizSubmission(event) {
   event.preventDefault(); // Prevent the default form submission behavior
   // Call the function to calculate the score and display the result
-  
+
   const { score, total } = calculateScore();
   displayQuizResult(score, total);
 }
